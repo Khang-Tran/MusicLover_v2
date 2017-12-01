@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{D39C6195-196F-4689-BD18-B9321A81C897}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MusicLover.WebApp/Server/Controllers/APIs/GigsController.cs">
+    <Files>
+      <File FileName="MusicLover.WebApp/Server/Controllers/APIs/GigsController.cs" Line="35" Column="19" />
+      <File FileName="MusicLover.WebApp/Server/Mapping/MappingProfile.cs" Line="1" Column="1" />
+      <File FileName="MusicLover.WebApp/Startup.cs" Line="51" Column="42" />
+      <File FileName="MusicLover.WebApp/Server/Extensions/IdentityUserExtensions.cs" Line="17" Column="64" />
+      <File FileName="MusicLover.WebApp/Server/Extensions/ServicesExtensions.cs" Line="27" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.MusicLover.WebApp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -34,5 +34,7 @@ namespace MusicLover.WebApp.Server.Core.Models
             Attendances = new Collection<Attendance>();
         }
 
+
+
     }
 }
