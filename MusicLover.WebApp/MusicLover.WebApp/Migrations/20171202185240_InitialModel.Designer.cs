@@ -12,7 +12,7 @@ using System;
 namespace MusicLover.WebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171202180733_InitialModel")]
+    [Migration("20171202185240_InitialModel")]
     partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,7 +22,7 @@ namespace MusicLover.WebApp.Migrations
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -31,7 +31,8 @@ namespace MusicLover.WebApp.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<int>("RoleId");
+                    b.Property<string>("RoleId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -40,7 +41,7 @@ namespace MusicLover.WebApp.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -49,7 +50,8 @@ namespace MusicLover.WebApp.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -58,7 +60,7 @@ namespace MusicLover.WebApp.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -66,7 +68,8 @@ namespace MusicLover.WebApp.Migrations
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -75,11 +78,11 @@ namespace MusicLover.WebApp.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
-                    b.Property<int>("RoleId");
+                    b.Property<string>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -88,9 +91,9 @@ namespace MusicLover.WebApp.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
                     b.Property<string>("LoginProvider");
 
@@ -105,7 +108,7 @@ namespace MusicLover.WebApp.Migrations
 
             modelBuilder.Entity("MusicLover.WebApp.Server.Core.Models.ApplicationRole", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
@@ -132,7 +135,7 @@ namespace MusicLover.WebApp.Migrations
 
             modelBuilder.Entity("MusicLover.WebApp.Server.Core.Models.ApplicationUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
@@ -170,8 +173,6 @@ namespace MusicLover.WebApp.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<int?>("ProfilePhotoId");
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -189,8 +190,6 @@ namespace MusicLover.WebApp.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("ProfilePhotoId");
-
                     b.ToTable("AspNetUsers");
                 });
 
@@ -200,11 +199,9 @@ namespace MusicLover.WebApp.Migrations
 
                     b.Property<string>("AttendeeId");
 
-                    b.Property<int?>("AttendeeId1");
-
                     b.HasKey("GigId", "AttendeeId");
 
-                    b.HasIndex("AttendeeId1");
+                    b.HasIndex("AttendeeId");
 
                     b.ToTable("AttendanceSet");
                 });
@@ -215,15 +212,9 @@ namespace MusicLover.WebApp.Migrations
 
                     b.Property<string>("FollowerId");
 
-                    b.Property<int?>("FolloweeId1");
-
-                    b.Property<int?>("FollowerId1");
-
                     b.HasKey("FolloweeId", "FollowerId");
 
-                    b.HasIndex("FolloweeId1");
-
-                    b.HasIndex("FollowerId1");
+                    b.HasIndex("FollowerId");
 
                     b.ToTable("FollowingSet");
                 });
@@ -250,8 +241,6 @@ namespace MusicLover.WebApp.Migrations
                     b.Property<string>("ArtistId")
                         .IsRequired();
 
-                    b.Property<int?>("ArtistId1");
-
                     b.Property<DateTime>("DateTime");
 
                     b.Property<int>("GenreId");
@@ -264,7 +253,7 @@ namespace MusicLover.WebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtistId1");
+                    b.HasIndex("ArtistId");
 
                     b.HasIndex("GenreId");
 
@@ -301,9 +290,13 @@ namespace MusicLover.WebApp.Migrations
                     b.Property<string>("FileName")
                         .HasMaxLength(155);
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("PhotoSet");
                 });
@@ -316,18 +309,14 @@ namespace MusicLover.WebApp.Migrations
 
                     b.Property<bool>("IsRead");
 
-                    b.Property<int?>("UserId1");
-
                     b.HasKey("UserId", "NotificationId");
 
                     b.HasIndex("NotificationId");
 
-                    b.HasIndex("UserId1");
-
                     b.ToTable("UserNotificationSet");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationRole")
                         .WithMany()
@@ -335,7 +324,7 @@ namespace MusicLover.WebApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationUser")
                         .WithMany()
@@ -343,7 +332,7 @@ namespace MusicLover.WebApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationUser")
                         .WithMany()
@@ -351,7 +340,7 @@ namespace MusicLover.WebApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationRole")
                         .WithMany()
@@ -364,26 +353,20 @@ namespace MusicLover.WebApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MusicLover.WebApp.Server.Core.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("MusicLover.WebApp.Server.Core.Models.Photo", "ProfilePhoto")
-                        .WithMany()
-                        .HasForeignKey("ProfilePhotoId");
                 });
 
             modelBuilder.Entity("MusicLover.WebApp.Server.Core.Models.Attendance", b =>
                 {
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationUser", "Attendee")
                         .WithMany()
-                        .HasForeignKey("AttendeeId1");
+                        .HasForeignKey("AttendeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.Gig", "Gig")
                         .WithMany("Attendances")
@@ -395,19 +378,21 @@ namespace MusicLover.WebApp.Migrations
                 {
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationUser", "Followee")
                         .WithMany("Followers")
-                        .HasForeignKey("FolloweeId1")
+                        .HasForeignKey("FolloweeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationUser", "Follower")
                         .WithMany("Followees")
-                        .HasForeignKey("FollowerId1");
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MusicLover.WebApp.Server.Core.Models.Gig", b =>
                 {
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationUser", "Artist")
                         .WithMany()
-                        .HasForeignKey("ArtistId1");
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.Genre", "Genre")
                         .WithMany()
@@ -423,6 +408,14 @@ namespace MusicLover.WebApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("MusicLover.WebApp.Server.Core.Models.Photo", b =>
+                {
+                    b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationUser", "User")
+                        .WithOne("ProfilePhoto")
+                        .HasForeignKey("MusicLover.WebApp.Server.Core.Models.Photo", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("MusicLover.WebApp.Server.Core.Models.UserNotification", b =>
                 {
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.Notification", "Notification")
@@ -432,7 +425,7 @@ namespace MusicLover.WebApp.Migrations
 
                     b.HasOne("MusicLover.WebApp.Server.Core.Models.ApplicationUser", "User")
                         .WithMany("UserNotifications")
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618

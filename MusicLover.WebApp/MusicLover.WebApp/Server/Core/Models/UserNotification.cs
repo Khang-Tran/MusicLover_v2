@@ -1,12 +1,17 @@
-﻿namespace MusicLover.WebApp.Server.Core.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MusicLover.WebApp.Server.Core.Models
 {
     public class UserNotification
     {
-        public string UserId { get; private set; }
-        public ApplicationUser User { get; private set; }
+        [ForeignKey("ApplicationUser")]
 
-        public int NotificationId { get; private set; }
-        public Notification Notification { get; private set; }
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
+        [ForeignKey("Notification")]
+
+        public int NotificationId { get; set; }
+        public Notification Notification { get; set; }
         public bool IsRead { get; set; }
     }
 }

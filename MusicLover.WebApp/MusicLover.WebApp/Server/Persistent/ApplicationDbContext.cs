@@ -4,7 +4,7 @@ using MusicLover.WebApp.Server.Core.Models;
 
 namespace MusicLover.WebApp.Server.Persistent
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public DbSet<Gig> GigSet { get; set; }
         public DbSet<Genre> GenreSet { get; set; }

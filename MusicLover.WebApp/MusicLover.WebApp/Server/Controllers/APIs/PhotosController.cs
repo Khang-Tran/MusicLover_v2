@@ -30,7 +30,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upload(int userId, IFormFile file)
+        public async Task<IActionResult> Upload(string userId, IFormFile file)
         {
             var user = await _context.UserSet.SingleOrDefaultAsync(u => u.Id == userId);
             if (user == null)
@@ -59,7 +59,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             return Ok(photo);
         }
         [HttpGet]
-        public async Task<Photo> GetPhoto(int userId)
+        public async Task<Photo> GetPhoto(string userId)
         {
             var photo = await _context.PhotoSet.SingleOrDefaultAsync(u => u.UserId == userId);
             return photo;

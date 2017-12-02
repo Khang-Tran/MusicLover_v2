@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusicLover.WebApp.Server.Core.Models
 {
-    public class ApplicationUser : IdentityUser<int>
+    public class ApplicationUser : IdentityUser<string>
     {
         [StringLength(155)]
         [Required]

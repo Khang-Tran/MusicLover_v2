@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusicLover.WebApp.Server.Core.Models
 {
@@ -9,10 +10,12 @@ namespace MusicLover.WebApp.Server.Core.Models
     {
         public int Id { get; set; }
 
-        public ApplicationUser Artist { get; set; }
 
         [Required]
+        [ForeignKey("ApplicationUser")]
         public string ArtistId { get; set; }
+        public ApplicationUser Artist { get; set; }
+
 
         public DateTime DateTime { get; set; }
 
@@ -21,13 +24,15 @@ namespace MusicLover.WebApp.Server.Core.Models
         public string Venue { get; set; }
 
         [Required]
+        [ForeignKey("Genre")]
+
         public int GenreId { get; set; }
 
         public Genre Genre { get; set; }
 
-        public bool IsCancel { get; private set; }
+        public bool IsCancel { get; set; }
 
-        public ICollection<Attendance> Attendances { get; private set; }
+        public ICollection<Attendance> Attendances { get; set; }
 
         public Gig()
         {

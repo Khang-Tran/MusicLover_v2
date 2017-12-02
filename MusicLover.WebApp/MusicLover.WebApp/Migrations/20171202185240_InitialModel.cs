@@ -13,8 +13,7 @@ namespace MusicLover.WebApp.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<string>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Description = table.Column<string>(maxLength: 255, nullable: true),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
@@ -23,6 +22,34 @@ namespace MusicLover.WebApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    FirstName = table.Column<string>(maxLength: 155, nullable: false),
+                    LastName = table.Column<string>(maxLength: 155, nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,20 +66,6 @@ namespace MusicLover.WebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PhotoSet",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FileName = table.Column<string>(maxLength: 155, nullable: true),
-                    UserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PhotoSet", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -60,7 +73,7 @@ namespace MusicLover.WebApp.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
-                    RoleId = table.Column<int>(nullable: false)
+                    RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,42 +87,6 @@ namespace MusicLover.WebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    FirstName = table.Column<string>(maxLength: 155, nullable: false),
-                    LastName = table.Column<string>(maxLength: 155, nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    ProfilePhotoId = table.Column<int>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_PhotoSet_ProfilePhotoId",
-                        column: x => x.ProfilePhotoId,
-                        principalTable: "PhotoSet",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -117,7 +94,7 @@ namespace MusicLover.WebApp.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -137,7 +114,7 @@ namespace MusicLover.WebApp.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -154,8 +131,8 @@ namespace MusicLover.WebApp.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -178,7 +155,7 @@ namespace MusicLover.WebApp.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
@@ -199,25 +176,43 @@ namespace MusicLover.WebApp.Migrations
                 columns: table => new
                 {
                     FolloweeId = table.Column<string>(nullable: false),
-                    FollowerId = table.Column<string>(nullable: false),
-                    FolloweeId1 = table.Column<int>(nullable: true),
-                    FollowerId1 = table.Column<int>(nullable: true)
+                    FollowerId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FollowingSet", x => new { x.FolloweeId, x.FollowerId });
                     table.ForeignKey(
-                        name: "FK_FollowingSet_AspNetUsers_FolloweeId1",
-                        column: x => x.FolloweeId1,
+                        name: "FK_FollowingSet_AspNetUsers_FolloweeId",
+                        column: x => x.FolloweeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FollowingSet_AspNetUsers_FollowerId1",
-                        column: x => x.FollowerId1,
+                        name: "FK_FollowingSet_AspNetUsers_FollowerId",
+                        column: x => x.FollowerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhotoSet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FileName = table.Column<string>(maxLength: 155, nullable: true),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhotoSet", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PhotoSet_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -227,7 +222,6 @@ namespace MusicLover.WebApp.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ArtistId = table.Column<string>(nullable: false),
-                    ArtistId1 = table.Column<int>(nullable: true),
                     DateTime = table.Column<DateTime>(nullable: false),
                     GenreId = table.Column<int>(nullable: false),
                     IsCancel = table.Column<bool>(nullable: false),
@@ -237,11 +231,11 @@ namespace MusicLover.WebApp.Migrations
                 {
                     table.PrimaryKey("PK_GigSet", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GigSet_AspNetUsers_ArtistId1",
-                        column: x => x.ArtistId1,
+                        name: "FK_GigSet_AspNetUsers_ArtistId",
+                        column: x => x.ArtistId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_GigSet_GenreSet_GenreId",
                         column: x => x.GenreId,
@@ -255,18 +249,17 @@ namespace MusicLover.WebApp.Migrations
                 columns: table => new
                 {
                     GigId = table.Column<int>(nullable: false),
-                    AttendeeId = table.Column<string>(nullable: false),
-                    AttendeeId1 = table.Column<int>(nullable: true)
+                    AttendeeId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AttendanceSet", x => new { x.GigId, x.AttendeeId });
                     table.ForeignKey(
-                        name: "FK_AttendanceSet_AspNetUsers_AttendeeId1",
-                        column: x => x.AttendeeId1,
+                        name: "FK_AttendanceSet_AspNetUsers_AttendeeId",
+                        column: x => x.AttendeeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AttendanceSet_GigSet_GigId",
                         column: x => x.GigId,
@@ -304,8 +297,7 @@ namespace MusicLover.WebApp.Migrations
                 {
                     UserId = table.Column<string>(nullable: false),
                     NotificationId = table.Column<int>(nullable: false),
-                    IsRead = table.Column<bool>(nullable: false),
-                    UserId1 = table.Column<int>(nullable: true)
+                    IsRead = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -317,8 +309,8 @@ namespace MusicLover.WebApp.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserNotificationSet_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_UserNotificationSet_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -364,29 +356,19 @@ namespace MusicLover.WebApp.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_ProfilePhotoId",
-                table: "AspNetUsers",
-                column: "ProfilePhotoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AttendanceSet_AttendeeId1",
+                name: "IX_AttendanceSet_AttendeeId",
                 table: "AttendanceSet",
-                column: "AttendeeId1");
+                column: "AttendeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FollowingSet_FolloweeId1",
+                name: "IX_FollowingSet_FollowerId",
                 table: "FollowingSet",
-                column: "FolloweeId1");
+                column: "FollowerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FollowingSet_FollowerId1",
-                table: "FollowingSet",
-                column: "FollowerId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GigSet_ArtistId1",
+                name: "IX_GigSet_ArtistId",
                 table: "GigSet",
-                column: "ArtistId1");
+                column: "ArtistId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GigSet_GenreId",
@@ -399,14 +381,15 @@ namespace MusicLover.WebApp.Migrations
                 column: "GigId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PhotoSet_UserId",
+                table: "PhotoSet",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserNotificationSet_NotificationId",
                 table: "UserNotificationSet",
                 column: "NotificationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserNotificationSet_UserId1",
-                table: "UserNotificationSet",
-                column: "UserId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -433,6 +416,9 @@ namespace MusicLover.WebApp.Migrations
                 name: "FollowingSet");
 
             migrationBuilder.DropTable(
+                name: "PhotoSet");
+
+            migrationBuilder.DropTable(
                 name: "UserNotificationSet");
 
             migrationBuilder.DropTable(
@@ -449,9 +435,6 @@ namespace MusicLover.WebApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "GenreSet");
-
-            migrationBuilder.DropTable(
-                name: "PhotoSet");
         }
     }
 }
