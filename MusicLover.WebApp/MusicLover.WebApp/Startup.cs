@@ -21,7 +21,7 @@ namespace MusicLover.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddTransient<AppInitializer>();
             services.AddCustomIdentity();
             services.AddAutoMapper();
 
@@ -31,7 +31,7 @@ namespace MusicLover.WebApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppInitializer appInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -47,8 +47,10 @@ namespace MusicLover.WebApp
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvcWithDefaultRoute();
+            appInitializer.Seed().Wait();
         }
     }
 }

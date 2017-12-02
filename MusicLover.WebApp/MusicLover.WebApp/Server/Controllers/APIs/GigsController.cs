@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MusicLover.WebApp.Server.Extensions;
 using MusicLover.WebApp.Server.Persistent;
+using System.Threading.Tasks;
 
 namespace MusicLover.WebApp.Server.Controllers.APIs
 {
@@ -15,12 +17,12 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             _context = context;
             _mapper = mapper;
         }
-        /*
+
         [HttpDelete("/api/gigs/{:id}")]
 
-        public async IActionResult Cancel(int id)
+        public async Task<IActionResult> Cancel(int id)
         {
-            var userId = User.Identity.GetUserId();
+            var userId = User.GetUserId();
             var gig = await _context.GigSet
                               .Include(g => g.Genre)
                               .Include(g => g.Artist)
@@ -29,16 +31,15 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             if (gig == null || gig.IsCancel)
                 return NotFound(id + " not found");
 
-            if (gig.ArtistId != userId)
-                return Unauthorized("Access denied");
-
-            gig.IsCancel = true;
-    
-
-        } */
+            return Ok(gig);
 
 
-       
+
+
+        }
+
+
+
     }
 
 }
