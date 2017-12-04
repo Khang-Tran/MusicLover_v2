@@ -20,11 +20,11 @@ namespace MusicLover.WebApp.Server.Persistent
             {
                 var genres = new List<Genre>()
                 {
-                    new Genre() {Id = 1, Name = "Action"},
-                    new Genre() {Id = 2, Name = "Fiction"},
-                    new Genre() {Id = 3, Name = "Horror"},
-                    new Genre() {Id = 4, Name = "Romantic"},
-                    new Genre() {Id = 5, Name = "Advanture"}
+                    new Genre() {Name = "Action"},
+                    new Genre() {Name = "Fiction"},
+                    new Genre() {Name = "Horror"},
+                    new Genre() {Name = "Romantic"},
+                    new Genre() {Name = "Advanture"}
                 };
 
                 _context.AddRange(genres);

@@ -24,14 +24,15 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         public async Task<IActionResult> Attend(int gigId, string attendeeId)
         {
             var userId = User.GetUserId();
-            var existed = await _context.AttendanceSet.AnyAsync(a => a.AttendeeId == attendeeId & a.GigId == gigId);
+            var existed = await _context.AttendanceSet
+                .AnyAsync(a => a.AttendeeId == attendeeId & a.GigId == gigId);
             if (existed)
                 return BadRequest(attendeeId + " already attended " + gigId);
 
             var attendance = new Attendance() { GigId = gigId, AttendeeId = userId };
 
             _context.AttendanceSet.Add(attendance);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok(gigId);
         }
 
@@ -41,12 +42,13 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             var userId = User.GetUserId();
 
             var attendance =
-                await _context.AttendanceSet.SingleOrDefaultAsync(a => a.AttendeeId == userId && a.GigId == id);
+                await _context.AttendanceSet
+                .SingleOrDefaultAsync(a => a.AttendeeId == userId && a.GigId == id);
             if (attendance == null)
                 return NotFound(id);
 
             _context.AttendanceSet.Remove(attendance);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok(id);
         }
 

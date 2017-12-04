@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace MusicLover.WebApp.Server.Core.Models
 {
     public class Gig
     {
+        [Key]
         public int Id { get; set; }
 
 
@@ -39,7 +41,17 @@ namespace MusicLover.WebApp.Server.Core.Models
             Attendances = new Collection<Attendance>();
         }
 
+        public void Cancel()
+        {
+            IsCancel = true;
+            var notification = Notification.GigCanceled(this);
 
+            var attendees = Attendances.Select(a => a.Attendee);
+            foreach (var attendee in attendees)
+            {
+                attendee.Notify(notification);
+            }
+        }
 
     }
 }

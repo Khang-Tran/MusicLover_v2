@@ -39,7 +39,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             var userId = User.GetUserId();
             var notifications = await _context.UserNotificationSet.Where(u => u.UserId == userId && !u.IsRead)
                 .ToListAsync();
-            notifications.ForEach(n => { n.IsRead = true; });
+            notifications.ForEach(n => n.Read());
             await _context.SaveChangesAsync();
             return Ok();
         }

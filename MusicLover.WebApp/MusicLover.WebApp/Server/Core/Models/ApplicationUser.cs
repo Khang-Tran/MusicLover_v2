@@ -30,5 +30,10 @@ namespace MusicLover.WebApp.Server.Core.Models
 
         [NotMapped]
         public string Name => FirstName + " " + LastName;
+
+        public void Notify(Notification notification)
+        {
+            UserNotifications.Add(new UserNotification(this, notification));
+        }
     }
 }

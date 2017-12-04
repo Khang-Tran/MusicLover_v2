@@ -5,6 +5,7 @@ namespace MusicLover.WebApp.Server.Core.Models
 {
     public class Photo
     {
+        [Key]
         public int Id { get; set; }
         [StringLength(155)]
         public string FileName { get; set; }

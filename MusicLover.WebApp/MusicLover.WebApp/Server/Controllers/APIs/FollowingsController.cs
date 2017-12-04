@@ -25,14 +25,18 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         public async Task<IActionResult> Follow(string followeeId)
         {
             var userId = User.GetUserId();
-            var existed = await _context.FollowingSet.AnyAsync(f => f.FolloweeId == followeeId && f.FollowerId == userId);
+            var existed = await _context.FollowingSet
+                .AnyAsync(f => f.FolloweeId == followeeId && f.FollowerId == userId);
+
             if (existed)
                 return BadRequest(followeeId + "existed");
+
             var follow = new Following()
             {
                 FolloweeId = followeeId,
                 FollowerId = userId
             };
+
             _context.FollowingSet.Add(follow);
             await _context.SaveChangesAsync();
             return Ok(followeeId);
@@ -43,7 +47,8 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         {
             var userId = User.GetUserId();
             var following =
-                await _context.FollowingSet.SingleOrDefaultAsync(a => a.FolloweeId == id && a.FollowerId == userId);
+                await _context.FollowingSet
+                .SingleOrDefaultAsync(a => a.FolloweeId == id && a.FollowerId == userId);
             if (following == null)
                 return NotFound(id);
             _context.FollowingSet.Remove(following);

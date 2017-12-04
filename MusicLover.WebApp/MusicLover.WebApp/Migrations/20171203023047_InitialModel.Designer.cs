@@ -12,7 +12,7 @@ using System;
 namespace MusicLover.WebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171202185240_InitialModel")]
+    [Migration("20171203023047_InitialModel")]
     partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

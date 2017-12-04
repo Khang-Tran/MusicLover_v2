@@ -30,7 +30,8 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
 
             if (gig == null || gig.IsCancel)
                 return NotFound(id + " not found");
-
+            gig.Cancel();
+            await _context.SaveChangesAsync();
             return Ok(gig);
 
 
