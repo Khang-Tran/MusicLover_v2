@@ -7,6 +7,7 @@ using MusicLover.WebApp.Server.Persistent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MusicLover.WebApp.Server.Core.Resources;
 
 namespace MusicLover.WebApp.Server.Controllers.APIs
 {
@@ -23,14 +24,14 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Notification>> GetNewNotifications()
+        public async Task<IEnumerable<NotificationResource>> GetNewNotifications()
         {
             var userId = User.GetUserId();
             var notifications = await _context.UserNotificationSet.Where(u => u.UserId == userId && !u.IsRead)
                 .Select(u => u.Notification)
                 .Include(g => g.Gig.Artist)
                 .ToListAsync();
-            return notifications;
+            return _mapper.Map<IEnumerable<Notification>, IEnumerable<NotificationResource>>(notifications);
         }
 
         [HttpPost]

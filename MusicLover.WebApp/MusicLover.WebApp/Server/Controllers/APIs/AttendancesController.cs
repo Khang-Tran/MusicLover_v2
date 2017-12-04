@@ -5,6 +5,7 @@ using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Extensions;
 using MusicLover.WebApp.Server.Persistent;
 using System.Threading.Tasks;
+using MusicLover.WebApp.Server.Core.Resources;
 
 namespace MusicLover.WebApp.Server.Controllers.APIs
 {
@@ -21,13 +22,14 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         }
 
         [HttpPost]
-        public async Task<IActionResult> Attend(int gigId, string attendeeId)
+        public async Task<IActionResult> Attend([FromBody] AttendanceResource attendanceResource)
         {
             var userId = User.GetUserId();
+            var gigId = attendanceResource.GigId;
             var existed = await _context.AttendanceSet
-                .AnyAsync(a => a.AttendeeId == attendeeId & a.GigId == gigId);
+                .AnyAsync(a => a.AttendeeId == userId & a.GigId == gigId);
             if (existed)
-                return BadRequest(attendeeId + " already attended " + gigId);
+                return BadRequest(userId + " already attended " + gigId);
 
             var attendance = new Attendance() { GigId = gigId, AttendeeId = userId };
 
