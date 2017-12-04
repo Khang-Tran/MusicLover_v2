@@ -6556,11 +6556,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Khang's\\source\\repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\Server.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Khang's\\Source\\Repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\Server.Tests.csproj",
       "projectName": "Server.Tests",
-      "projectPath": "C:\\Users\\Khang's\\source\\repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\Server.Tests.csproj",
+      "projectPath": "C:\\Users\\Khang's\\Source\\Repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\Server.Tests.csproj",
       "packagesPath": "C:\\Users\\Khang's\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Khang's\\source\\repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\obj\\",
+      "outputPath": "C:\\Users\\Khang's\\Source\\Repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

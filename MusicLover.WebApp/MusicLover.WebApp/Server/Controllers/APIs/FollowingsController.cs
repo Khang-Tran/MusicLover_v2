@@ -6,27 +6,30 @@ using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Extensions;
 using MusicLover.WebApp.Server.Persistent;
 using System.Threading.Tasks;
+using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
+using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
 
 namespace MusicLover.WebApp.Server.Controllers.APIs
 {
     [Route("/api/followings/")]
     public class FollowingsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IFollowingRepository _followingRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public FollowingsController(ApplicationDbContext context, IMapper mapper)
+        public FollowingsController(IMapper mapper, IFollowingRepository followingRepository, IUnitOfWork unitOfWork)
         {
-            _context = context;
             _mapper = mapper;
+            _followingRepository = followingRepository;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
         public async Task<IActionResult> Follow(string followeeId)
         {
             var userId = User.GetUserId();
-            var existed = await _context.FollowingSet
-                .AnyAsync(f => f.FolloweeId == followeeId && f.FollowerId == userId);
+            var existed = await _followingRepository.IsExist(userId, followeeId);
 
             if (existed)
                 return BadRequest(followeeId + "existed");
@@ -37,8 +40,8 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
                 FollowerId = userId
             };
 
-            _context.FollowingSet.Add(follow);
-            await _context.SaveChangesAsync();
+            _followingRepository.Add(follow);
+            await _unitOfWork.CompleteAsync();
             return Ok(followeeId);
         }
 
@@ -46,13 +49,11 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         public async Task<IActionResult> Delete(string id)
         {
             var userId = User.GetUserId();
-            var following =
-                await _context.FollowingSet
-                .SingleOrDefaultAsync(a => a.FolloweeId == id && a.FollowerId == userId);
+            var following = await _followingRepository.GetFollowing(id, userId);
             if (following == null)
                 return NotFound(id);
-            _context.FollowingSet.Remove(following);
-            await _context.SaveChangesAsync();
+            _followingRepository.Remove(following);
+            await _unitOfWork.CompleteAsync();
             return Ok(id);
         }
     }

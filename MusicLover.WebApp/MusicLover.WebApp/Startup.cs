@@ -7,6 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicLover.WebApp.Server.Extensions;
 using MusicLover.WebApp.Server.Persistent;
+using MusicLover.WebApp.Server.Persistent.Repositories.Commons;
+using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
+using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
+using IAttendanceRepository = MusicLover.WebApp.Server.Persistent.Repositories.Commons.IAttendanceRepository;
+
 namespace MusicLover.WebApp
 {
     public class Startup
@@ -21,6 +26,13 @@ namespace MusicLover.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            services.AddScoped<IFollowingRepository, FollowingRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddScoped<IGigRepository, GigRepository>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<AppInitializer>();
             services.AddCustomIdentity();
             services.AddAutoMapper();
