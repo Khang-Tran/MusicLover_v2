@@ -9,6 +9,7 @@ using MusicLover.WebApp.Server.Persistent;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using MusicLover.WebApp.Server.Core.Resources;
 
 namespace MusicLover.WebApp.Server.Controllers.APIs
 {
@@ -59,10 +60,10 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             return Ok(photo);
         }
         [HttpGet]
-        public async Task<Photo> GetPhoto(string userId)
+        public async Task<PhotoResource> GetPhoto(string userId)
         {
             var photo = await _context.PhotoSet.SingleOrDefaultAsync(u => u.UserId == userId);
-            return photo;
+            return _mapper.Map<Photo, PhotoResource>(photo);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace MusicLover.WebApp.Server.Core.Models
         [StringLength(155)]
         public string LastName { get; set; }
         public DateTime CreatedDate { get; set; }
+ 
         public Photo ProfilePhoto { get; set; }
 
         public ICollection<Following> Followers { get; set; }
