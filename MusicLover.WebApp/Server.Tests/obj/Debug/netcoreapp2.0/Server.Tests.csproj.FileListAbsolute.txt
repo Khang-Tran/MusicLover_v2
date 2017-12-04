@@ -1,0 +1,11 @@
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\bin\Debug\netcoreapp2.0\Server.Tests.deps.json
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\bin\Debug\netcoreapp2.0\Server.Tests.runtimeconfig.json
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\bin\Debug\netcoreapp2.0\Server.Tests.runtimeconfig.dev.json
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\bin\Debug\netcoreapp2.0\Server.Tests.dll
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\obj\Debug\netcoreapp2.0\Server.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\obj\Debug\netcoreapp2.0\Server.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\obj\Debug\netcoreapp2.0\Server.Tests.AssemblyInfoInputs.cache
+C:\Users\Khang's\source\repos\MusicLover_v2\MusicLover.WebApp\Server.Tests\obj\Debug\netcoreapp2.0\Server.Tests.AssemblyInfo.cs
