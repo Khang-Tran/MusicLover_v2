@@ -26,13 +26,13 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         }
 
         [HttpPost]
-        public async Task<IActionResult> Follow(string followeeId)
+        public async Task<IActionResult> Follow([FromBody] string followeeId)
         {
-            var userId = User.GetUserId();
+            var userId = "1";
             var existed = await _followingRepository.IsExist(userId, followeeId);
 
             if (existed)
-                return BadRequest(followeeId + "existed");
+                return BadRequest(followeeId + " existed");
 
             var follow = new Following()
             {
@@ -48,7 +48,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var userId = User.GetUserId();
+            var userId = "1";
             var following = await _followingRepository.GetFollowing(id, userId);
             if (following == null)
                 return NotFound(id);

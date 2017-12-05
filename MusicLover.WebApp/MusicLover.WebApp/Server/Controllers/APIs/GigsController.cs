@@ -13,6 +13,7 @@ using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
 
 namespace MusicLover.WebApp.Server.Controllers.APIs
 {
+    [Route("/api/gigs/")]
     public class GigsController : Controller
     {
         private readonly IMapper _mapper;
@@ -59,7 +60,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             return Ok(result);
         }
 
-        [HttpDelete("/api/gigs/{:id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Cancel(int id)
         {
             var userId = User.GetUserId();
@@ -68,6 +69,8 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             if (gig == null || gig.IsCancel)
                 return NotFound(id + " not found");
             gig.Cancel();
+
+            // Need to map here
             await _unitOfWork.CompleteAsync();
             return Ok(gig);
         }

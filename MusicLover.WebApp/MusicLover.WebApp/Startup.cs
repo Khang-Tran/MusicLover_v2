@@ -10,7 +10,6 @@ using MusicLover.WebApp.Server.Persistent;
 using MusicLover.WebApp.Server.Persistent.Repositories.Commons;
 using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
-using IAttendanceRepository = MusicLover.WebApp.Server.Persistent.Repositories.Commons.IAttendanceRepository;
 
 namespace MusicLover.WebApp
 {

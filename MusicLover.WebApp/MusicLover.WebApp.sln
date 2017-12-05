@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicLover.WebApp", "MusicL
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D21E0D3F-72BD-46A3-9428-676A03D23771}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server.Tests", "Server.Tests\Server.Tests.csproj", "{40F7451E-EB7A-481C-994B-574F4BB34B44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,9 +19,16 @@ Global
 		{D39C6195-196F-4689-BD18-B9321A81C897}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D39C6195-196F-4689-BD18-B9321A81C897}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D39C6195-196F-4689-BD18-B9321A81C897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F7451E-EB7A-481C-994B-574F4BB34B44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F7451E-EB7A-481C-994B-574F4BB34B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F7451E-EB7A-481C-994B-574F4BB34B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F7451E-EB7A-481C-994B-574F4BB34B44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{40F7451E-EB7A-481C-994B-574F4BB34B44} = {D21E0D3F-72BD-46A3-9428-676A03D23771}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2313CD15-B361-4091-A5FD-90216918B8D3}

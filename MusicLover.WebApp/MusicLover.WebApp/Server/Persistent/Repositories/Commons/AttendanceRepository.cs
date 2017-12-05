@@ -4,17 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MusicLover.WebApp.Server.Core.Models;
+using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 
 namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
 {
-    public interface IAttendanceRepository
-    {
-        Task<IEnumerable<Attendance>> GetFutureAttendances(string userId);
-        Task<Attendance> GetAttendance(int gigId, string attendeeId);
-        Task<bool> IsExisted(int gigId, string attendeeId);
-        void Add(Attendance attendance);
-        void Remove(Attendance attendance);
-    }
 
     public class AttendanceRepository : IAttendanceRepository
     {

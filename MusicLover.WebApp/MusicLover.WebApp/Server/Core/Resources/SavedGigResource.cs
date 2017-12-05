@@ -7,12 +7,11 @@ namespace MusicLover.WebApp.Server.Core.Resources
 {
     public class SavedGigResource
     {
-        public int Id { get; set; }
+        public string ArtistId { get; set; }
+        
         public string Venue { get; set; }
-   
-        public string Date { get; set; }
-      
-        public string Time { get; set; }
+
+        public DateTime DateTime;
        
         public int GenreId { get; set; }
        
