@@ -17,13 +17,11 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
     public class GigsController : Controller
     {
         private readonly IMapper _mapper;
-        private readonly IGigRepository _gigRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public GigsController(IMapper mapper, IGigRepository gigRepository, IUnitOfWork unitOfWork)
+        public GigsController(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
-            _gigRepository = gigRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -34,7 +32,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
                 return BadRequest(ModelState);
             var gig = _mapper.Map<SavedGigResource, Gig>(savedGigResource);
 
-           _gigRepository.Add(gig);
+           _unitOfWork.GigRepository.Add(gig);
             await _unitOfWork.CompleteAsync();
 
             var result = _mapper.Map<Gig, SavedGigResource>(gig);
@@ -48,14 +46,14 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var gig = await _gigRepository.GetGigWithId(id);
+            var gig = await _unitOfWork.GigRepository.GetGigWithId(id);
             if (gig == null)
                 return NotFound(id);
             _mapper.Map<SavedGigResource, Gig>(savedGigResource, gig);
 
             await _unitOfWork.CompleteAsync();
 
-            gig = await _gigRepository.GetGigWithId(gig.Id);
+            gig = await _unitOfWork.GigRepository.GetGigWithId(gig.Id);
             var result = _mapper.Map<Gig, SavedGigResource>(gig);
             return Ok(result);
         }
@@ -64,7 +62,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         public async Task<IActionResult> Cancel(int id)
         {
             var userId = User.GetUserId();
-            var gig = await _gigRepository.GetGigWithId(id);
+            var gig = await _unitOfWork.GigRepository.GetGigWithId(id);
 
             if (gig == null || gig.IsCancel)
                 return NotFound(id + " not found");
@@ -78,7 +76,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         [HttpGet("{id}")]
         public async Task<IActionResult> GetGig(int id)
         {
-            var gig = await _gigRepository.GetGigWithId(id);
+            var gig = await _unitOfWork.GigRepository.GetGigWithId(id);
             if (gig == null)
                 return NotFound(id);
 
@@ -89,7 +87,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         [HttpGet]
         public async Task<IEnumerable<GigResource>> GetGigs()
         {
-            var gigs = await _gigRepository.GetAllUpcomingGigs();
+            var gigs = await _unitOfWork.GigRepository.GetAllUpcomingGigs();
 
             return _mapper.Map<IEnumerable<Gig>, IEnumerable<GigResource>>(gigs);
         }

@@ -10,21 +10,22 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using MusicLover.WebApp.Server.Core.Resources;
+using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
 
 namespace MusicLover.WebApp.Server.Controllers.APIs
 {
     [Route("/api/users/{userId}/photos")]
     public class PhotosController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IHostingEnvironment _host;
         private readonly IOptionsSnapshot<PhotoSettings> _options;
         private readonly IMapper _mapper;
         private readonly PhotoSettings _photoSettings;
-        public PhotosController(ApplicationDbContext context, IHostingEnvironment host, IOptionsSnapshot<PhotoSettings> options, IMapper mapper)
+        public PhotosController(IUnitOfWork unitOfWork, IHostingEnvironment host, IOptionsSnapshot<PhotoSettings> options, IMapper mapper)
         {
             _photoSettings = options.Value;
-            _context = context;
+            _unitOfWork = unitOfWork;
             _host = host;
             _options = options;
             _mapper = mapper;
@@ -33,7 +34,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         [HttpPost]
         public async Task<IActionResult> Upload(string userId, IFormFile file)
         {
-            var user = await _context.UserSet.SingleOrDefaultAsync(u => u.Id == userId);
+            var user = await _unitOfWork.PhotoRepository.GetUser(userId);
             if (user == null)
                 return NotFound();
 
@@ -56,13 +57,13 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
 
             var photo = new Photo { FileName = fileName };
             user.ProfilePhoto = photo;
-            await _context.SaveChangesAsync();
+            await _unitOfWork.CompleteAsync();
             return Ok(photo);
         }
         [HttpGet]
         public async Task<PhotoResource> GetPhoto(string userId)
         {
-            var photo = await _context.PhotoSet.SingleOrDefaultAsync(u => u.UserId == userId);
+            var photo = await _unitOfWork.PhotoRepository.GetPhoto(userId);
             return _mapper.Map<Photo, PhotoResource>(photo);
         }
     }

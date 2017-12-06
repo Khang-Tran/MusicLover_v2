@@ -1,0 +1,11 @@
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\b\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.deps.json
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\b\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.runtimeconfig.json
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\b\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.runtimeconfig.dev.json
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\b\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.dll
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\b\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.pdb
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\i\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.csprojResolveAssemblyReference.cache
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\i\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.csproj.CoreCompileInputs.cache
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\i\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.AssemblyInfoInputs.cache
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\i\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.AssemblyInfo.cs
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\i\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.dll
+C:\Users\cktran1\Source\Repos\MusicLover_v2\MusicLover.WebApp\.vs\MusicLover.WebApp\lut\0\i\MusicLover.WebApp\Debug\netcoreapp2.0\MusicLover.WebApp.pdb

@@ -14,14 +14,10 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
     [Route("/api/followings/")]
     public class FollowingsController : Controller
     {
-        private readonly IMapper _mapper;
-        private readonly IFollowingRepository _followingRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public FollowingsController(IMapper mapper, IFollowingRepository followingRepository, IUnitOfWork unitOfWork)
+        public FollowingsController(IUnitOfWork unitOfWork)
         {
-            _mapper = mapper;
-            _followingRepository = followingRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -29,7 +25,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         public async Task<IActionResult> Follow([FromBody] string followeeId)
         {
             var userId = "1";
-            var existed = await _followingRepository.IsExist(userId, followeeId);
+            var existed = await _unitOfWork.FollowingRepository.IsExist(userId, followeeId);
 
             if (existed)
                 return BadRequest(followeeId + " existed");
@@ -40,7 +36,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
                 FollowerId = userId
             };
 
-            _followingRepository.Add(follow);
+            _unitOfWork.FollowingRepository.Add(follow);
             await _unitOfWork.CompleteAsync();
             return Ok(followeeId);
         }
@@ -49,10 +45,10 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         public async Task<IActionResult> Delete(string id)
         {
             var userId = "1";
-            var following = await _followingRepository.GetFollowing(id, userId);
+            var following = await _unitOfWork.FollowingRepository.GetFollowing(id, userId);
             if (following == null)
                 return NotFound(id);
-            _followingRepository.Remove(following);
+            _unitOfWork.FollowingRepository.Remove(following);
             await _unitOfWork.CompleteAsync();
             return Ok(id);
         }

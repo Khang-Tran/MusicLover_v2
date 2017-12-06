@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MusicLover.WebApp.Server.Core.Commons;
 using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 
 namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
 {
 
-    public class AttendanceRepository : IAttendanceRepository
+    public class AttendanceRepository : DataRepositoryBase<Attendance>, IAttendanceRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public AttendanceRepository(ApplicationDbContext context)
+        public AttendanceRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
@@ -34,16 +35,6 @@ namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
         public async Task<bool> IsExisted(int gigId, string attendeeId)
         {
             return await _context.AttendanceSet.AnyAsync(a => a.AttendeeId == attendeeId && a.GigId == gigId);
-        }
-
-        public void Add(Attendance attendance)
-        {
-            _context.AttendanceSet.Add(attendance);
-        }
-
-        public void Remove(Attendance attendance)
-        {
-            _context.AttendanceSet.Remove(attendance);
         }
     }
 }

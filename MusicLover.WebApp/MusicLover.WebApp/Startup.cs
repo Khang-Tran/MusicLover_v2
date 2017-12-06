@@ -9,6 +9,7 @@ using MusicLover.WebApp.Server.Extensions;
 using MusicLover.WebApp.Server.Persistent;
 using MusicLover.WebApp.Server.Persistent.Repositories.Commons;
 using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
+using MusicLover.WebApp.Server.Persistent.UnitOfWork.Commons;
 using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
 
 namespace MusicLover.WebApp

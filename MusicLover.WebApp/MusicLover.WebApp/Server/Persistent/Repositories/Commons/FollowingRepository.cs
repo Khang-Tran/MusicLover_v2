@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MusicLover.WebApp.Server.Core.Commons;
 using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 
 namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
 {
-    public class FollowingRepository : IFollowingRepository
+    public class FollowingRepository : DataRepositoryBase<Following>, IFollowingRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public FollowingRepository(ApplicationDbContext context)
+        public FollowingRepository(ApplicationDbContext context):base(context)
         {
             _context = context;
         }
@@ -34,16 +35,6 @@ namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
                 .Where(f => f.FollowerId == followerId)
                 .Select(g => g.Followee)
                 .ToListAsync();
-        }
-
-        public void Add(Following follow)
-        {
-            _context.FollowingSet.Add(follow);
-        }
-
-        public void Remove(Following follow)
-        {
-            _context.FollowingSet.Remove(follow);
         }
     }
 }

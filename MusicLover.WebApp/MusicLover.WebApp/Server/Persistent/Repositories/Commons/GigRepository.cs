@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MusicLover.WebApp.Server.Core.Commons;
 using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 
 namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
 {
-    public class GigRepository : IGigRepository
+    public class GigRepository : DataRepositoryBase<Gig>, IGigRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public GigRepository(ApplicationDbContext context)
+        public GigRepository(ApplicationDbContext context):base(context)
         {
             _context = context;
         }
@@ -80,14 +81,5 @@ namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
                 .ToListAsync(); 
         }
 
-        public void Add(Gig gig)
-        {
-            _context.GigSet.Add(gig);
-        }
-
-        public void Remove(Gig gig)
-        {
-            _context.GigSet.Remove(gig);
-        }
     }
 }

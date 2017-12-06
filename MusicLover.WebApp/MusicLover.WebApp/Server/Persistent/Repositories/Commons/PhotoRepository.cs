@@ -20,5 +20,10 @@ namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
         {
             return await _context.PhotoSet.SingleOrDefaultAsync(p => p.UserId == userId);
         }
+
+        public async Task<ApplicationUser> GetUser(string userId)
+        {
+            return await _context.Users.SingleOrDefaultAsync(p => p.Id == userId);
+        }
     }
 }

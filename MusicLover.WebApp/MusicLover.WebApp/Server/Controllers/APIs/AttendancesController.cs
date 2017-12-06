@@ -1,11 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Extensions;
 using System.Threading.Tasks;
-using MusicLover.WebApp.Server.Core.Resources;
-using MusicLover.WebApp.Server.Persistent.Repositories.Commons;
-using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
 
 namespace MusicLover.WebApp.Server.Controllers.APIs
@@ -13,12 +9,10 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
     [Route("/api/attendances/")]
     public class AttendancesController : Controller
     {
-        private readonly IAttendanceRepository _attendanceRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AttendancesController(IAttendanceRepository attendanceRepository, IUnitOfWork unitOfWork)
+        public AttendancesController(IUnitOfWork unitOfWork)
         {
-            _attendanceRepository = attendanceRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -26,13 +20,13 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         public async Task<IActionResult> Attend([FromBody] int gigId)
         {
             var userId = User.GetUserId();
-            var attendance = await _attendanceRepository.GetAttendance(gigId, userId);
+            var attendance = await _unitOfWork.AttendanceRepository.GetAttendance(gigId, userId);
             if (attendance != null) 
                 return BadRequest(userId + " already attended " + gigId);
 
             attendance = new Attendance() { GigId = gigId, AttendeeId = userId };
 
-            _attendanceRepository.Add(attendance);
+            _unitOfWork.AttendanceRepository.Add(attendance);
             await _unitOfWork.CompleteAsync();
             return Ok(gigId);
         }
@@ -43,11 +37,11 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             var userId = User.GetUserId();
 
             var attendance =
-                await _attendanceRepository.GetAttendance(id, userId);
+                await _unitOfWork.AttendanceRepository.GetAttendance(id, userId);
             if (attendance == null)
                 return NotFound(id);
 
-            _attendanceRepository.Remove(attendance);
+            _unitOfWork.AttendanceRepository.Remove(attendance);
             await _unitOfWork.CompleteAsync();
             return Ok(id);
         }
