@@ -155,7 +155,6 @@ publish/
 # Microsoft Azure Build Output
 csx/
 *.build.csdef
-
 # Microsoft Azure Emulator
 ecf/
 rcf/

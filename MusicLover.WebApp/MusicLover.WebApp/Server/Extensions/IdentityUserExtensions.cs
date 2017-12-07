@@ -12,7 +12,7 @@ namespace MusicLover.WebApp.Server.Extensions
             if (principal == null)
                 throw new ArgumentNullException(nameof(principal));
 
-            var id = principal.FindFirst(OpenIdConnectConstants.Claims.Subject)?.Value;
+            var id = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             return id;
         }

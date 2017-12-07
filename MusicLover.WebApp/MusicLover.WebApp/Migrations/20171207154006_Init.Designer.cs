@@ -12,8 +12,8 @@ using System;
 namespace MusicLover.WebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171203023047_InitialModel")]
-    partial class InitialModel
+    [Migration("20171207154006_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

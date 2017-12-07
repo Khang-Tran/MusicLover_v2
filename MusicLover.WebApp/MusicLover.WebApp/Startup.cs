@@ -62,7 +62,7 @@ namespace MusicLover.WebApp
             app.UseAuthentication();
 
             app.UseMvcWithDefaultRoute();
-            appInitializer.Seed().Wait();
+            //appInitializer.Seed().Wait();
         }
     }
 }

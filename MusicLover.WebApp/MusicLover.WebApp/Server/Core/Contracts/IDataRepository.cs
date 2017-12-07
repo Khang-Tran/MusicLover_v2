@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace MusicLover.WebApp.Server.Core.Contracts
 {
-    public interface IDataRepository<T>
+    public interface IDataRepository { }
+    public interface IDataRepository<T>: IDataRepository
         where T: class, new()
     {
         void Add(T entity);

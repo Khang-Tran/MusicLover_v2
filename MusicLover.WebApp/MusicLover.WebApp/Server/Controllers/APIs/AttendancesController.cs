@@ -20,11 +20,11 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         public async Task<IActionResult> Attend([FromBody] int gigId)
         {
             var userId = User.GetUserId();
-            var attendance = await _unitOfWork.AttendanceRepository.GetAttendance(gigId, userId);
-            if (attendance != null) 
+            var existed = await _unitOfWork.AttendanceRepository.IsExisted(gigId, userId);
+            if (existed) 
                 return BadRequest(userId + " already attended " + gigId);
 
-            attendance = new Attendance() { GigId = gigId, AttendeeId = userId };
+            var attendance = new Attendance() { GigId = gigId, AttendeeId = userId };
 
             _unitOfWork.AttendanceRepository.Add(attendance);
             await _unitOfWork.CompleteAsync();

@@ -1,11 +1,14 @@
 ﻿using MusicLover.WebApp.Server.Persistent.Repositories.Commons;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using MusicLover.WebApp.Controllers;
 using MusicLover.WebApp.Server.Controllers.APIs;
 using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Extensions;
@@ -18,60 +21,68 @@ namespace Server.Tests.Controller.Tests
     public class AttendancesControllerTests
     {
         private readonly AttendancesController _controller;
-        private readonly Mock<IAttendanceRepository> _mockRepo;
+        private readonly Mock<IAttendanceRepository> _mockRepository;
         private readonly string _userId;
         public AttendancesControllerTests()
         {
-            _mockRepo = new Mock<IAttendanceRepository>();
+            _mockRepository = new Mock<IAttendanceRepository>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
-            _controller = new AttendancesController(_mockRepo.Object, mockUnitOfWork.Object);
+            mockUnitOfWork.SetupGet(u => u.AttendanceRepository).Returns(_mockRepository.Object);
+          
+            _controller = new AttendancesController(mockUnitOfWork.Object);
             _userId = "1";
-            _controller.MockUser(_userId,"user1@domain.com");
+            _controller.MockUser(_userId, "test@domain.com");
         }
 
         [Fact]
-        public async void Attend_ValidRequest_ShouldReturnOkObject()
+        public async void Attend_HappyPath_ShouldReturnOkObject()
         {
             var gigId = 1;
+
+            _mockRepository.Setup(g => g.IsExisted(gigId, _userId)).ReturnsAsync(false);
+
             var result = await _controller.Attend(gigId);
 
             result.Should().BeOfType<OkObjectResult>();
         }
 
         [Fact]
-        public async void Attend_IsExisted_ShouldReturnBadRequestObject()
+        public async void Attend_ExistedGig_ShouldReturnBadRequestObject()
         {
             var gigId = 1;
-            var attendance = new Attendance();
-            _mockRepo.Setup(x => x.GetAttendance(gigId, _userId)).ReturnsAsync(attendance);
+
+            _mockRepository.Setup(g => g.IsExisted(gigId, _userId)).ReturnsAsync(true);
 
             var result = await _controller.Attend(gigId);
 
             result.Should().BeOfType<BadRequestObjectResult>();
         }
-        
+
         [Fact]
-        public async void Delete_ValidRequest_ShouldReturnOk()
+        public async void Delete_HappyPath_ShouldReturnOkObject()
         {
             var gigId = 1;
             var attendance = new Attendance();
-            _mockRepo.Setup(x => x.GetAttendance(gigId, _userId)).ReturnsAsync(attendance);
 
-            var result = await _controller.Attend(gigId);
+            _mockRepository.Setup(g => g.GetAttendance(gigId, _userId)).ReturnsAsync(attendance);
+
+            var result = await _controller.Delete(gigId);
 
             result.Should().BeOfType<OkObjectResult>();
         }
 
         [Fact]
-        public async void Delete_GigIsNull_ShouldReturnNotFoundObject()
+        public async void Delete_AttendanceNotExisted_ReturnNotFoundObject()
         {
             var gigId = 1;
+            _mockRepository.Setup(g => g.GetAttendance(gigId, _userId)).ReturnsAsync((Attendance)null);
+            var result = await _controller.Delete(gigId);
 
-            var result = await _controller.Attend(gigId);
-
-            result.Should().BeOfType<OkObjectResult>();
+            result.Should().BeOfType<NotFoundObjectResult>();
         }
 
 
+        
     }
+  
 }

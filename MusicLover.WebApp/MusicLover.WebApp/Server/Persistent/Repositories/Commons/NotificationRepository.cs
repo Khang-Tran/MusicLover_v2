@@ -8,7 +8,7 @@ using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 
 namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
 {
-    public class NotificationRepository
+    public class NotificationRepository: INotificationRepository
     {
         private readonly ApplicationDbContext _context;
 
