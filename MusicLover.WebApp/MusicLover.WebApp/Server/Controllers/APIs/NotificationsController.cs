@@ -25,11 +25,11 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         }
 
         [HttpGet]
-        public async Task<IEnumerable<NotificationResource>> GetNewNotifications()
+        public async Task<IActionResult> GetNewNotifications()
         {
             var userId = User.GetUserId();
             var notifications = await _unitOfWork.NotificationRepository.GetNewNotifications(userId);
-            return _mapper.Map<IEnumerable<Notification>, IEnumerable<NotificationResource>>(notifications);
+            return Ok(_mapper.Map<IEnumerable<Notification>, IEnumerable<NotificationResource>>(notifications));
         }
 
         [HttpPost]
