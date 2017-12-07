@@ -9,27 +9,27 @@ using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Core.Resources;
 using MusicLover.WebApp.Server.Extensions;
 using MusicLover.WebApp.Server.Persistent;
+using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
 
 namespace MusicLover.WebApp.Server.Controllers.APIs
 {
     [Route("/api/followees/")]
     public class FolloweesController:Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public FolloweesController(ApplicationDbContext context, IMapper mapper)
+        public FolloweesController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<UserResource>> GetFollowees()
+        public async Task<IActionResult> GetFollowees()
         {
             var userId = User.GetUserId();
 
-            var followees =await _context.FollowingSet.Where(f => f.FolloweeId == userId)
-                .Select(g => g.Followee).ToListAsync();
-            return _mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<UserResource>>(followees);
+            var followees = await _unitOfWork.FolloweeRepository.GetAllFollowees(userId);
+            return Ok(_mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<UserResource>>(followees));
         }
     }
 }

@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MusicLover.WebApp.Server.Core.Commons;
 using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 
 namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
 {
-    public class NotificationRepository: INotificationRepository
+    public class NotificationRepository: DataRepositoryBase<Notification>, INotificationRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public NotificationRepository(ApplicationDbContext context)
+        public NotificationRepository(ApplicationDbContext context):base(context)
         {
             _context = context;
         }

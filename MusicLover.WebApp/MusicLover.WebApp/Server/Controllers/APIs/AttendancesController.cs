@@ -26,7 +26,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
 
             var attendance = new Attendance() { GigId = gigId, AttendeeId = userId };
 
-            _unitOfWork.AttendanceRepository.Add(attendance);
+            _unitOfWork.AttendanceRepository.AddAsync(attendance);
             await _unitOfWork.CompleteAsync();
             return Ok(gigId);
         }

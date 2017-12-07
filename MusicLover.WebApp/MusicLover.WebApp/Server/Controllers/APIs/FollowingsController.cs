@@ -36,7 +36,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
                 FollowerId = userId
             };
 
-            _unitOfWork.FollowingRepository.Add(follow);
+            _unitOfWork.FollowingRepository.AddAsync(follow);
             await _unitOfWork.CompleteAsync();
             return Ok(followeeId);
         }

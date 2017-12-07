@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using MusicLover.WebApp.Server.Controllers.APIs;
 using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Extensions;
-using MusicLover.WebApp.Server.Persistent.Repositories.Commons;
 using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
 using Xunit;

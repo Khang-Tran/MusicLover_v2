@@ -15,7 +15,7 @@ namespace MusicLover.WebApp.Server.Core.Models
         public Gig Gig { get; set; }
 
 
-        private Notification()
+        public Notification()
         {
 
         }

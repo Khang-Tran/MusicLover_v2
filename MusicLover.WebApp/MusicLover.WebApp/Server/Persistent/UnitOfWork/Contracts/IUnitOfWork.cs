@@ -7,6 +7,7 @@ namespace MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts
     public interface IUnitOfWork: IDisposable
     {
         IAttendanceRepository AttendanceRepository { get; }
+        IFolloweeRepository FolloweeRepository { get; }
         IFollowingRepository FollowingRepository { get; }
         IGenreRepository GenreRepository { get; }
         IGigRepository GigRepository { get; }

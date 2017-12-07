@@ -9,18 +9,18 @@ using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 
 namespace MusicLover.WebApp.Server.Persistent.Repositories.Commons
 {
-    public class GenreRepository : DataRepositoryBase<Genre>, IGenreRepository
+    public class FolloweeRepository: DataRepositoryBase<ApplicationUser>, IFolloweeRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public GenreRepository(ApplicationDbContext context): base(context)
+        public FolloweeRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
-
-        public async Task<IEnumerable<Genre>> GetAll()
+        public async Task<IEnumerable<ApplicationUser>> GetAllFollowees(string userId)
         {
-            return await _context.GenreSet.ToListAsync();
+            return await _context.FollowingSet.Where(f => f.FolloweeId == userId)
+                .Select(g => g.Followee).ToListAsync();
         }
     }
 }

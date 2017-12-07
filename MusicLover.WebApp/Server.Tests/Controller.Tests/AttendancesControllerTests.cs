@@ -1,14 +1,6 @@
-﻿using MusicLover.WebApp.Server.Persistent.Repositories.Commons;
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Microsoft.AspNetCore.Http;
+﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using MusicLover.WebApp.Controllers;
 using MusicLover.WebApp.Server.Controllers.APIs;
 using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Extensions;

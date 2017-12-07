@@ -9,7 +9,7 @@ namespace MusicLover.WebApp.Server.Core.Contracts
     public interface IDataRepository<T>: IDataRepository
         where T: class, new()
     {
-        void Add(T entity);
+        void AddAsync(T entity);
         void Remove(T entity);
     }
 }

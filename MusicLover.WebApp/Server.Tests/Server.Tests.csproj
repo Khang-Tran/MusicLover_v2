@@ -16,8 +16,4 @@
     <ProjectReference Include="..\MusicLover.WebApp\MusicLover.WebApp.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controller.Tests\Contracts\" />
-  </ItemGroup>
-
 </Project>

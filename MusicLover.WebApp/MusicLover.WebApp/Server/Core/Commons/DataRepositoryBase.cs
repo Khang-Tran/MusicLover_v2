@@ -18,9 +18,9 @@ namespace MusicLover.WebApp.Server.Core.Commons
         {
             _context = context;
         }
-        public void Add(T entity)
+        public async void AddAsync(T entity)
         {
-            _context.Add(entity);
+            await _context.AddAsync(entity);
         }
 
         public void Remove(T entity)

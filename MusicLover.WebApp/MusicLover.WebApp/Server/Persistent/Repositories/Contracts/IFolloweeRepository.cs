@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MusicLover.WebApp.Server.Core.Contracts;
 using MusicLover.WebApp.Server.Core.Models;
 
 namespace MusicLover.WebApp.Server.Persistent.Repositories.Contracts
 {
-    public interface IGenreRepository: IDataRepository<Genre>
+    public interface IFolloweeRepository
     {
-        Task<IEnumerable<Genre>> GetAll();
+        Task<IEnumerable<ApplicationUser>> GetAllFollowees(string userId);
     }
 }

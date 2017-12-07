@@ -19,7 +19,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public GigsController(IMapper mapper, IUnitOfWork unitOfWork)
+        public GigsController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
@@ -32,7 +32,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
                 return BadRequest(ModelState);
             var gig = _mapper.Map<SavedGigResource, Gig>(savedGigResource);
 
-           _unitOfWork.GigRepository.Add(gig);
+           _unitOfWork.GigRepository.AddAsync(gig);
             await _unitOfWork.CompleteAsync();
 
             var result = _mapper.Map<Gig, SavedGigResource>(gig);

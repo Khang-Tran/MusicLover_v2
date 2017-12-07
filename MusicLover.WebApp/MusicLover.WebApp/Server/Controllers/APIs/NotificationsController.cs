@@ -8,18 +8,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MusicLover.WebApp.Server.Core.Resources;
+using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
 
 namespace MusicLover.WebApp.Server.Controllers.APIs
 {
     [Route("/api/notifications/")]
     public class NotificationsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public NotificationsController(ApplicationDbContext context, IMapper mapper)
+        public NotificationsController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -27,10 +28,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         public async Task<IEnumerable<NotificationResource>> GetNewNotifications()
         {
             var userId = User.GetUserId();
-            var notifications = await _context.UserNotificationSet.Where(u => u.UserId == userId && !u.IsRead)
-                .Select(u => u.Notification)
-                .Include(g => g.Gig.Artist)
-                .ToListAsync();
+            var notifications = await _unitOfWork.NotificationRepository.GetNewNotifications(userId);
             return _mapper.Map<IEnumerable<Notification>, IEnumerable<NotificationResource>>(notifications);
         }
 
@@ -38,10 +36,9 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
         public async Task<IActionResult> MarkAsRead()
         {
             var userId = User.GetUserId();
-            var notifications = await _context.UserNotificationSet.Where(u => u.UserId == userId && !u.IsRead)
-                .ToListAsync();
-            notifications.ForEach(n => n.Read());
-            await _context.SaveChangesAsync();
+            var notifications = await _unitOfWork.NotificationRepository.GetNewUserNotifications(userId);
+            notifications.ToList().ForEach(n => n.Read());
+            await _unitOfWork.CompleteAsync();
             return Ok();
         }
     }

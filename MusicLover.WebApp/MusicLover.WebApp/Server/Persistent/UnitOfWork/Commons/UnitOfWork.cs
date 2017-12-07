@@ -12,6 +12,7 @@ namespace MusicLover.WebApp.Server.Persistent.UnitOfWork.Commons
     {
         private readonly ApplicationDbContext _context;
         private IAttendanceRepository _attendanceRepository;
+        private IFolloweeRepository _followeeRepository;
         private IFollowingRepository _followingRepository;
         private IGenreRepository _genreRepository;
         private IGigRepository _gigRepository;
@@ -23,7 +24,7 @@ namespace MusicLover.WebApp.Server.Persistent.UnitOfWork.Commons
         }
 
         public IAttendanceRepository AttendanceRepository => _attendanceRepository ?? (_attendanceRepository = new AttendanceRepository(_context));
-
+        public IFolloweeRepository FolloweeRepository => _followeeRepository ?? (_followeeRepository = new FolloweeRepository(_context));
         public IFollowingRepository FollowingRepository => _followingRepository ?? (_followingRepository = new FollowingRepository(_context));
         public IGenreRepository GenreRepository => _genreRepository ?? (_genreRepository = new GenreRepository(_context));
         public IGigRepository GigRepository => _gigRepository ?? (_gigRepository = new GigRepository(_context));
