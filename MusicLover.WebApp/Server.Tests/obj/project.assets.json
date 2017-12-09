@@ -5336,6 +5336,7 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "3.2.0",
           "FluentAssertions": "4.19.4",
           "Microsoft.AspNetCore.All": "2.0.3",
+          "Microsoft.AspNetCore.Identity": "2.0.1",
           "Microsoft.NETCore.App": "2.0.0",
           "Moq": "4.7.145"
         },
@@ -13806,7 +13807,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cktran1\\.nuget\\packages\\": {},
+    "C:\\Users\\cktra\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13815,17 +13816,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\cktran1\\Source\\Repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\Server.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\cktra\\source\\repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\Server.Tests.csproj",
       "projectName": "Server.Tests",
-      "projectPath": "C:\\Users\\cktran1\\Source\\Repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\Server.Tests.csproj",
-      "packagesPath": "C:\\Users\\cktran1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cktran1\\Source\\Repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\obj\\",
+      "projectPath": "C:\\Users\\cktra\\source\\repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\Server.Tests.csproj",
+      "packagesPath": "C:\\Users\\cktra\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\cktra\\source\\repos\\MusicLover_v2\\MusicLover.WebApp\\Server.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\cktran1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cktra\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13833,13 +13834,13 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://nuget.org/api/v2/": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\cktran1\\Source\\Repos\\MusicLover_v2\\MusicLover.WebApp\\MusicLover.WebApp\\MusicLover.WebApp.csproj": {
-              "projectPath": "C:\\Users\\cktran1\\Source\\Repos\\MusicLover_v2\\MusicLover.WebApp\\MusicLover.WebApp\\MusicLover.WebApp.csproj"
+            "C:\\Users\\cktra\\source\\repos\\MusicLover_v2\\MusicLover.WebApp\\MusicLover.WebApp\\MusicLover.WebApp.csproj": {
+              "projectPath": "C:\\Users\\cktra\\source\\repos\\MusicLover_v2\\MusicLover.WebApp\\MusicLover.WebApp\\MusicLover.WebApp.csproj"
             }
           }
         }
@@ -13853,22 +13854,22 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "xunit.runner.visualstudio": {
+          "Microsoft.NET.Test.Sdk": {
             "target": "Package",
-            "version": "2.2.0"
+            "version": "[15.3.0, )"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0",
+            "version": "[2.0.0, )",
             "autoReferenced": true
           },
           "xunit": {
             "target": "Package",
-            "version": "2.2.0"
+            "version": "[2.2.0, )"
           },
-          "Microsoft.NET.Test.Sdk": {
+          "xunit.runner.visualstudio": {
             "target": "Package",
-            "version": "15.3.0"
+            "version": "[2.2.0, )"
           }
         },
         "imports": [

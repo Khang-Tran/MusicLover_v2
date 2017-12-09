@@ -6,6 +6,7 @@ using MusicLover.WebApp.Server.Core.Models;
 using MusicLover.WebApp.Server.Extensions;
 using MusicLover.WebApp.Server.Persistent;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using MusicLover.WebApp.Server.Persistent.Repositories.Contracts;
 using MusicLover.WebApp.Server.Persistent.UnitOfWork.Contracts;
 
@@ -21,6 +22,7 @@ namespace MusicLover.WebApp.Server.Controllers.APIs
             _unitOfWork = unitOfWork;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Follow([FromBody] string followeeId)
         {

@@ -1,6 +1,9 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,20 +29,44 @@ namespace MusicLover.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IAttendanceRepository, AttendanceRepository>();
-            services.AddScoped<IFollowingRepository, FollowingRepository>();
-            services.AddScoped<IGenreRepository, GenreRepository>();
-            services.AddScoped<IGigRepository, GigRepository>();
-            services.AddScoped<INotificationRepository, NotificationRepository>();
-            services.AddScoped<IPhotoRepository, PhotoRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<AppInitializer>();
-            services.AddCustomIdentity();
             services.AddAutoMapper();
 
+            services.AddTransient<IAttendanceRepository, AttendanceRepository>();
+            services.AddTransient<IFollowingRepository, FollowingRepository>();
+            services.AddTransient<IFolloweeRepository, FolloweeRepository>();
+            services.AddTransient<IGenreRepository, GenreRepository>();
+            services.AddTransient<IGigRepository, GigRepository>();
+            services.AddTransient<INotificationRepository, NotificationRepository>();
+            services.AddTransient<IPhotoRepository, PhotoRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<AppInitializer>();
+
+
+            services.AddCustomIdentity();
+
+          
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
-            services.AddMvc();
+            services.AddMvc(opt =>
+            {
+                opt.Filters.Add(new RequireHttpsAttribute());
+            });
+
+            services.AddAuthentication(o =>
+            {
+                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer();
+
+            services.AddCors(cfg =>
+            {
+                cfg.AddPolicy("AllAllowed", cfgb =>
+                {
+                    cfgb.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +79,7 @@ namespace MusicLover.WebApp
                 {
                     HotModuleReplacement = true
                 });
+                
             }
             else
             {
@@ -59,7 +87,11 @@ namespace MusicLover.WebApp
             }
 
             app.UseStaticFiles();
+
+
+
             app.UseAuthentication();
+           
 
             app.UseMvcWithDefaultRoute();
             //appInitializer.Seed().Wait();
